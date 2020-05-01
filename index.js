@@ -1,9 +1,14 @@
-require("dotenv").config()
+require("dotenv").config();
 const got = require("got");
-const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID , process.env.TWILIO_AUTH_TOKEN);
+const twilio = require("twilio")(
+    process.env.TWILIO_ACCOUNT_SID,
+    process.env.TWILIO_AUTH_TOKEN
+);
 
 async function getUplingtingNewsPost() {
-    const response = await got("https://www.reddit.com/r/UpliftingNews/top.json?t=day").json();
+    const response = await got(
+        "https://www.reddit.com/r/UpliftingNews/top.json?t=day"
+    ).json();
 
     if (!response.data.children[0].data) {
         return null;
@@ -14,7 +19,9 @@ async function getUplingtingNewsPost() {
 }
 
 async function getAwwPost() {
-    const response = await got("https://www.reddit.com/r/aww/top.json?t=day").json();
+    const response = await got(
+        "https://www.reddit.com/r/aww/top.json?t=day"
+    ).json();
 
     for (const post of response.data.children) {
         if (post.data.post_hint !== "image") {
@@ -28,22 +35,23 @@ async function getAwwPost() {
     return null;
 }
 
-
 async function sendText(body, mediaUrl) {
     const text = await twilio.messages.create({
-         body,
-         mediaUrl: mediaUrl ? [mediaUrl] : [],
-         from: process.env.TWILIO_PHONE_NUMBER,
-         to: process.env.DESTINATION_PHONE_NUMBER
+        body,
+        mediaUrl: mediaUrl ? [mediaUrl] : [],
+        from: process.env.TWILIO_PHONE_NUMBER,
+        to: process.env.DESTINATION_PHONE_NUMBER
     });
 
     return text;
 }
 
 async function main() {
-   const upliftingNewsPost = await getUplingtingNewsPost();
+    const upliftingNewsPost = await getUplingtingNewsPost();
     if (upliftingNewsPost) {
-        const text = await sendText(`${upliftingNewsPost.title} ${upliftingNewsPost.url}`);
+        const text = await sendText(
+            `${upliftingNewsPost.title} ${upliftingNewsPost.url}`
+        );
         console.log(text);
     }
 
@@ -60,7 +68,7 @@ exports.handler = async () => {
     await main();
 
     const response = {
-        statusCode: 200,
+        statusCode: 200
     };
 
     return response;

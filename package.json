@@ -3,14 +3,26 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/dguo/morning-joy.git"
+    "type": "git",
+    "url": "https://github.com/dguo/morning-joy.git"
   },
   "author": "Danny Guo <danny@dannyguo.com>",
   "license": "MIT",
+  "scripts": {
+     "format": "prettier --write \"**/*.js\"",
+     "format:check": "prettier --list-different \"**/*.js\""
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "got": "^11.0.3",
     "twilio": "^3.43.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "tabWidth": 4,
+    "trailingComma": "none"
   }
 }
