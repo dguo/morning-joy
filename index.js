@@ -48,6 +48,13 @@ async function sendText(body, mediaUrl) {
 
 async function main() {
     const upliftingNewsPost = await getUplingtingNewsPost();
+    const awwPost = await getAwwPost();
+
+    if (upliftingNewsPost || awwPost) {
+        const text = await sendText(`Here is your Morning Joy digest:`);
+        console.log(text);
+    }
+
     if (upliftingNewsPost) {
         const text = await sendText(
             `${upliftingNewsPost.title} ${upliftingNewsPost.url}`
@@ -55,7 +62,6 @@ async function main() {
         console.log(text);
     }
 
-    const awwPost = await getAwwPost();
     if (awwPost) {
         const text = await sendText(awwPost.title, awwPost.url);
         console.log(text);
