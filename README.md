@@ -5,7 +5,8 @@ note by texting you an uplifting news story and a picture of something cute.
 
 This was created for the [Twilio x DEV
 Hackathon](https://dev.to/devteam/announcing-the-twilio-hackathon-on-dev-2lh8).
-
+See the [submission
+post](https://dev.to/dguo/morning-joy-wake-up-to-a-happy-text-every-day-mk8).
 
 ## Installation
 
